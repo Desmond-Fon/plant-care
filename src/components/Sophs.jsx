@@ -20,13 +20,17 @@ const MyDiv = () => {
     };
 
     return (
-        <div onScroll={onScroll} className='flex justify-between items-center w-[60%] overflow-scroll border-[2px] border-black h-[200px] pt-12 pb-12 px-4 mt-10'>
-            <div className='flex justify-between items-center flex-col gap-5 w-[50%] text-left  h-[100%]'>
-                <p className={`${!scrolled ? 'border-l-[4px] border-black pl-2' : ''}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores facilis consectetur beatae, veniam iusto pariatur impedit officia fuga quae ex vel dolore molestias! Nesciunt provident alias pariatur magnam, tempore quam.</p>
-                <p className={`${scrolled ? 'border-l-[4px] border-black pl-2' : ''}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores facilis consectetur beatae, veniam iusto pariatur impedit officia fuga quae ex vel dolore molestias! Nesciunt provident alias pariatur magnam, tempore quam.</p>
-            </div>
-            <div className='w-[50%] h-[600px] bg-red-300'>
-                <img src={`${scrolled ? pic1 : pic2}`} alt="" className="object-cover h-[100%]" />
+        <div className=' w-[60%]'>
+            <h1>Hellooooo world</h1>
+            <div onScroll={onScroll} className='flex justify-between items-center overflow-scroll h-[200px]  px-4 mt-10 scrollable-div scroll-ml-auto'>
+                <div className='flex justify-between items-center flex-col gap-5 w-[50%] text-left  h-[100%]'>
+                    <p className={`${!scrolled ? '' : 'text-gray-400'}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores facilis consectetur beatae, veniam iusto pariatur impedit officia fuga quae ex vel dolore molestias! Nesciunt provident alias pariatur magnam, tempore quam.</p>
+                    <p className={`${scrolled ? '' : 'text-gray-400'}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores facilis consectetur beatae, veniam iusto pariatur impedit officia fuga quae ex vel dolore molestias! Nesciunt provident alias pariatur magnam, tempore quam.</p>
+                </div>
+                <div className='w-[50%] h-[100%]'>
+                    <img src={`${!scrolled ? pic2 : ''}`} alt="" className="object-cover h-[100%]" />
+                    <img src={`${scrolled ? pic1 : ''}`} alt="" className="object-cover h-[100%]" />
+                </div>
             </div>
         </div>
     );
