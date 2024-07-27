@@ -4,12 +4,14 @@ import Detect from './pages/detect';
 import About from './pages/about';
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
   return (
     <div className='font-futura text-black'>
+      <ToastContainer />
       <BrowserRouter>
         <Nav />
         <Routes>
