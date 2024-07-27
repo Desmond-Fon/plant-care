@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.svg'
 
 const Footer = () => {
     return (<>
-        <div className='flex justify-between items-start py-[140px] px-[120px]'>
-            <div className='w-1/2'><img src={logo} alt="" /></div>
+        <div className='flex justify-between items-start py-[140px] px-[120px] text-[20px]'>
+            <Link to={'/'} className='w-1/2'><img src={logo} alt="" /></Link>
             <div className='w-1/2 flex justify-start gap-[85px] items-start'>
                 <div className=''>
                     <h1 className='pb-[57px]'>Team</h1>
@@ -31,7 +32,7 @@ const Footer = () => {
                     <div>
                         <ul className='flex flex-col gap-[33px] items-start'>
                             <li>Privacy Policy</li>
-                            <li>COntact us</li>
+                            <li>Contact us</li>
                         </ul>
                     </div>
                 </div>

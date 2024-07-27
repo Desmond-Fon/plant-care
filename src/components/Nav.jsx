@@ -1,5 +1,5 @@
 import logo from '../assets/Logo.svg'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 const Nav = () => {
 
 
@@ -10,9 +10,9 @@ const Nav = () => {
     };
     return (<>
         <div className="py-[50px] px-[120px] flex justify-between items-center">
-            <div>
+            <Link to={'/'}>
                 <img src={logo} alt="" />
-            </div>
+            </Link>
 
             <div>
                 <div className='flex justify-end items-center gap-[90px] text-[24px]'>
