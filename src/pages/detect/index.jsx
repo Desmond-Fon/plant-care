@@ -1,19 +1,239 @@
-import ImageUploader from "../../components/ImageUploader";
+// import ImageUploader from "../../components/ImageUploader";
+import { useState } from 'react';
+import axios from 'axios';
+import { useAppToast } from '../../lib/UseAppToast';
+import { PhotoIcon } from '@heroicons/react/16/solid'
+// import CustomModal from './Modal';
 
 const Detect = () => {
-    return ( <div className="px-[120px]">
-        <div className='flex justify-between items-center gap-[56px]'>
-            <div className='w-1/2'>
-                <h1 className="text-[48px] pb-[20px]"><span className="font-bold">About</span> Us</h1>
-                <p className='text-[24px]'>
-                    Started as a small plant nursery plant planet is now offering home delivery service of various plant varities in 35+ cities. <br /> <br /> We work in the motto clean air with healthy plants. All the plants are grown with natural manure. <br /> <br /> Hope to hear more from you <br /><br /> Team Plant.
-                    <br />
-                </p>
+    const toast = useAppToast();
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [image, setImage] = useState(null);
+    const [show, setShow] = useState(false);
+    const [result, setResult] = useState([]);
+    const [imageResult, setImageResult] = useState('');
+
+    const handleShow = () => {
+        setShow(true);
+    };
+
+    // const handleClose = () => {
+    //     setShow(!show);
+    // };
+
+    const [loader, setLoader] = useState(false);
+
+    const handleImageUpload = async () => {
+        if (!image) {
+            toast({
+                status: "error",
+                description: "Please select an image",
+            });
+            return;
+        }
+        const formData = new FormData();
+        formData.append('file', selectedImage);
+        setLoader(true);
+        try {
+            const response = await axios.post(
+                'https://plant.id/api/v3/health_assessment?details=local_name,description,url,treatment,classification,common_names,cause',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Api-Key': '9nFpMKyxq7jy9QWRpGXJ36FTJOILfFL4wJpxhVZQRRODScFhWd',
+                    },
+                }
+            );
+            toast({
+                status: "success",
+                description: response.message || "Assessment Successful",
+            });
+            // Handle the response from the API
+            console.log(response.data);
+            setImageResult(response.data.input.images[0])
+            if (response?.data?.result?.is_plant?.binary === true) {
+                setResult(response.data.result)
+                handleShow()
+            } else {
+                toast({
+                    status: "error",
+                    description: "This is not a plant please upload a clearer plant image",
+                });
+            }
+            setLoader(false);
+        } catch (error) {
+            console.error(error);
+            setLoader(false);
+        }
+    };
+
+    const handleImageChange = (event) => {
+        setSelectedImage(event.target.files[0]);
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+    return (
+        <div className="px-[120px]">
+            <div className='flex justify-between items-start gap-[56px]'>
+                <div className='w-1/2'>
+                    <h1 className="text-[48px] pb-[20px]">How To <span className="font-bold">Detect</span></h1>
+                    <ul className='text-[24px] list-disc'>
+                       <li>Click on &quot;Upload a file&quot; button in the file input field.</li>
+                       <li>Upload the image of the affected plant. Please ensure you upload a clear image to avoid error during analysis.</li>
+                       <li>Click on analyze button to initiate the disease detection.</li>
+                       <li>A result containing three (3) possible diseases will be returned, together with health status, disease name, description, and treatment.</li>
+                    </ul>
+                </div>
+                <div className='w-1/2'>
+                    <div className='flex flex-col items-center gap-10'>
+                        {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
+                        <div className="text-center border-primary border-[2px] border-dashed p-16 rounded-[8px]">
+                            {image ? (
+                                <img src={image} alt="Uploaded preview" className="mx-auto h-20 w-26 object-cover rounded-md" />
+                            ) : (
+                                <PhotoIcon aria-hidden="true" className="mx-auto h-20 w-20 text-gray-300" />
+                            )}
+                            <div className="mt-4 mb-2 flex text-[16px] leading-6">
+                                <label
+                                    className="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-secondary"
+                                >
+                                    <span className="px-2">Upload a file</span>
+                                    <input
+                                        type="file" accept="image/*" onChange={handleImageChange} className="sr-only"
+                                    />
+                                </label>
+                                <p className="pl-2">or drag and drop</p>
+                            </div>
+                            <p className="text-[16px] leading-5">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        <button onClick={handleImageUpload} className='py-[10px] text-white px-[55px] rounded-[20px] bg-primary'>{loader ? (
+                            <svg
+                                className="animate-spin h-5 w-5 mr-3 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v8H4z"
+                                ></path>
+                            </svg>
+                        ) : (
+                            <>
+                                Analyze
+                            </>
+                        )}
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div className='w-1/2'>
-                <ImageUploader />
+
+            <div className='pt-[100px] '>
+                {show && (
+                    <>
+                        <h1 className='text-center text-[34px]'>Assessment Result</h1>
+
+                        <div className='flex justify-center items-center py-10'>
+                            <img src={imageResult} alt="" />
+                        </div>
+
+                        <div className='flex flex-col w-full gap-3 items-start'>
+                            {result.length > 0 && <p className='font-bold text-[22px]'>Health Status: <span className={`${result?.is_healthy?.binary ? "text-green-500" : 'text-red-500'}`}>{result && result?.is_healthy?.binary ? "Healthy" : "Not healthy"}</span></p>}
+
+                            <div>
+                                <p className='font-semibold text-[22px] pb-3'>Possible Disease(s):</p>
+                                <div className='flex flex-col w-full items-start gap-10'>
+                                    {result && result?.disease && result?.disease?.suggestions.slice(0, 3).map((disease, i) => {
+                                        return (
+                                            <div key={i} className='flex flex-col items-start gap-4'>
+                                                <h1 className='font-semibold text-[20px]'>{i + 1}. Name: {disease.name}</h1>
+                                                <h1 className='font-semibold text-[20px]'>Probability: {disease.probability * 100}%</h1>
+
+                                                <div>
+                                                    <p className='text-[18px]'><span className='font-semibold text-[20px]'>Description:</span> {disease?.details.description}</p>
+                                                    <a href={disease?.details.url} target="_blank" rel="noopener noreferrer">Learn More</a>
+                                                </div>
+
+                                                <div>
+                                                    <p className='font-semibold pb-2 text-[20px]'>Treatment</p>
+                                                    <div className='flex flex-col w-full gap-3'>
+
+                                                        <div>
+                                                            <h1 className='text-[18px] font-semibold'>Biological Treatment</h1>
+                                                            {disease?.details?.treatment?.biological && disease?.details?.treatment?.biological.map((biological, i) => {
+                                                                return (
+                                                                    <div key={i}>
+                                                                        <div>
+                                                                            <ul className='list-disc'>
+                                                                                <li key={i} className='text-[18px]'>{biological}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                        <div>
+                                                            <h1 className='text-[18px] font-semibold'>Chemical Treatment</h1>
+                                                            {disease?.details?.treatment?.chemical && disease?.details?.treatment?.chemical.map((chemical, i) => {
+                                                                return (
+                                                                    <div key={i}>
+                                                                        <div>
+                                                                            <ul className='list-disc'>
+                                                                                <li key={i} className='text-[18px]'>{chemical}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                        <div>
+                                                            <h1 className='text-[18px] font-semibold'>Prevention</h1>
+                                                            {disease?.details?.treatment?.prevention && disease?.details?.treatment?.prevention.map((prevention, i) => {
+                                                                return (
+                                                                    <div key={i}>
+                                                                        <div>
+                                                                            <ul className='list-disc'>
+                                                                                <li key={i} className='text-[18px]'>{prevention}</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
-        </div>    </div> );
+
+            <div className='flex justify-center items-center mt-[80px] pb-[40px]'>
+                <div className='h-[4px] rounded-[10px] w-[70%] bg-[#1B4332]'></div>
+            </div>
+        </div>);
 }
- 
+
 export default Detect;
