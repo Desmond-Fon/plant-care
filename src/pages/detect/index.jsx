@@ -41,7 +41,7 @@ const Detect = () => {
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Api-Key': '9nFpMKyxq7jy9QWRpGXJ36FTJOILfFL4wJpxhVZQRRODScFhWd',
+                        'Api-Key': import.meta.env.VITE_API_BASE_URL,
                     },
                 }
             );
