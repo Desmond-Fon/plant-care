@@ -83,7 +83,7 @@ const Detect = () => {
 
 
     return (
-        <div className="px-[20px] lg:px-[120px]">
+        <div className="px-[20px] lg:px-[120px] overflow-x-hidden">
             <div className='flex flex-col lg:flex-row justify-between items-start gap-[56px]'>
                 <div className='lg:w-1/2'>
                     <h1 className="text-[36px] lg:text-[48px] pb-[20px]">How To <span className="font-bold">Detect</span></h1>
@@ -94,10 +94,10 @@ const Detect = () => {
                        <li>A result containing three (3) possible diseases will be returned, together with health status, disease name, description, and treatment.</li>
                     </ul>
                 </div>
-                <div className='lg:w-1/2'>
-                    <div className='flex flex-col items-center gap-10'>
+                <div className='lg:w-1/2 flex justify-center items-center w-full'>
+                    <div className='flex flex-col justify-center w-full items-center gap-10 overflow-x-hidden'>
                         {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
-                        <div className="text-center border-primary border-[2px] border-dashed p-16 rounded-[8px]">
+                        <div className="text-center border-primary border-[2px] border-dashed p-8 lg:p-16 rounded-[8px]">
                             {image ? (
                                 <img src={image} alt="Uploaded preview" className="mx-auto h-20 w-26 object-cover rounded-md" />
                             ) : (
@@ -105,16 +105,16 @@ const Detect = () => {
                             )}
                             <div className="mt-4 mb-2 flex text-[16px] leading-6">
                                 <label
-                                    className="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-secondary "
+                                    className="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-secondary outline-none border-none"
                                 >
-                                    <span className="px-2 whitespace-nowrap">Upload a file</span>
+                                    <span className="px-1 whitespace-nowrap">Upload a file</span>
                                     <input
                                         type="file" accept="image/*" onChange={handleImageChange} className="sr-only"
                                     />
                                 </label>
                                 <p className="pl-2 whitespace-nowrap">or drag and drop</p>
                             </div>
-                            <p className="text-[16px] leading-5">PNG, JPG, GIF up to 10MB</p>
+                            <p className="text-[16px] leading-5">PNG, JPG, GIF up to 5MB</p>
                         </div>
                         <button onClick={handleImageUpload} className='py-[10px] text-white px-[55px] rounded-[20px] bg-primary'>{loader ? (
                             <svg
@@ -161,7 +161,7 @@ const Detect = () => {
 
                             <div>
                                 <p className='font-semibold text-[22px] pb-3'>Possible Disease(s):</p>
-                                <div className='flex flex-col w-full items-start gap-10'>
+                                <div className='flex flex-col w-full items-start gap-16'>
                                     {result && result?.disease && result?.disease?.suggestions.slice(0, 3).map((disease, i) => {
                                         return (
                                             <div key={i} className='flex flex-col items-start gap-4'>
