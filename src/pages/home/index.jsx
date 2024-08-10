@@ -8,20 +8,21 @@ import slide1 from '../../assets/slide1.svg'
 import slide2 from '../../assets/slide5.svg'
 import slide3 from '../../assets/slide3.svg'
 import slide4 from '../../assets/slide4.svg'
+import slidee from '../../assets/slidee.svg'
 import { Link } from 'react-router-dom'
 
 
 const Home = () => {
-    return (<div className="px-[120px]">
-        <div className="flex justify-between items-center gap-[56px]">
-            <div className="w-1/2">
-                <h1 className="text-[48px] ">Customize your place with the <span className="font-bold">best</span> possible plant solutions</h1>
+    return (<div className="px-[20px] lg:px-[120px]">
+        <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-[56px]">
+            <div className="lg:w-1/2">
+                <h1 className="lg:text-[48px] text-[36px]">Customize your place with the <span className="font-bold">best</span> possible plant solutions</h1>
 
-                <p className='text-[32px] text-tertiary pt-4 pb-[40px]'>Recommendations that are healthy <br />and match your aesthetics</p>
+                <p className='text-[24px] pl-1 lg:text-[32px] text-tertiary pt-4 pb-[40px]'>Recommendations that are healthy <br className='hidden lg:block' />and match your aesthetics</p>
 
-                <Link to={'/detect'} className='py-[10px] text-white px-[55px] rounded-[20px] bg-primary'>Begin Analysis</Link>
+                <Link to={'/detect'} className='py-[15px] text-[20px] text-white px-[55px] rounded-[20px] bg-primary'>Begin Analysis</Link>
             </div>
-            <div className="w-1/2 flex gap-[20px]">
+            <div className="lg:w-1/2 flex gap-[20px]">
                 <div className='flex flex-col gap-[20px]'>
                     <img src={img1} alt="" /><img src={img2} alt="" />
                 </div>
@@ -36,13 +37,17 @@ const Home = () => {
         </div>
 
         <div className='flex flex-col items-center'>
-            <h2 className='text-[48px]'><span className='font-bold'>Top</span> Picks</h2>
-            <p className='text-[32px] text-tertiary pt-[24px] pb-[40px]'>Trained to identify 1500+ plant diseases</p>
+            <h2 className='text-[36px] lg:text-[48px]'><span className='font-bold'>Top</span> Picks</h2>
+            <p className='text-[24px] lg:text-[32px] text-tertiary pt-[24px] pb-[40px]'>Trained to identify 1500+ plant diseases</p>
 
-            <div className='relative flex justify-between items-center gap-10'>
-                <img src={ellipse1} className='absolute z-10 -top-12 w-full' alt="" />
-                <img src={slide1} alt="" /><img src={slide2} alt="" /><img src={slide3} alt="" /><img src={slide4} alt="" />
-                <img src={ellipse2} className='absolute z-10 -bottom-10 w-full' alt="" />
+            <div className='relative flex flex-col lg:flex-row justify-between items-center gap-10'>
+                <img src={ellipse1} className='absolute z-10 hidden lg:block -top-12 w-full' alt="" />
+                <img src={slide1} alt="" />
+                <img src={slide2} alt="" />
+                <img src={slide3} alt="" />
+                <img src={slide4} className='hidden lg:block' alt="" />
+                <img src={slidee} className='lg:hidden' alt="" />
+                <img src={ellipse2} className='absolute z-10 hidden lg:block -bottom-10 w-full' alt="" />
             </div>
         </div>
 

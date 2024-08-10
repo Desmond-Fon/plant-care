@@ -31,6 +31,7 @@ const Detect = () => {
             });
             return;
         }
+        setResult([])
         const formData = new FormData();
         formData.append('file', selectedImage);
         setLoader(true);
@@ -82,18 +83,18 @@ const Detect = () => {
 
 
     return (
-        <div className="px-[120px]">
-            <div className='flex justify-between items-start gap-[56px]'>
-                <div className='w-1/2'>
-                    <h1 className="text-[48px] pb-[20px]">How To <span className="font-bold">Detect</span></h1>
-                    <ul className='text-[24px] list-disc'>
+        <div className="px-[20px] lg:px-[120px]">
+            <div className='flex flex-col lg:flex-row justify-between items-start gap-[56px]'>
+                <div className='lg:w-1/2'>
+                    <h1 className="text-[36px] lg:text-[48px] pb-[20px]">How To <span className="font-bold">Detect</span></h1>
+                    <ul className='text-[18px] lg:text-[24px] list-disc pl-4 lg:pl-0 px-4'>
                        <li>Click on &quot;Upload a file&quot; button in the file input field.</li>
                        <li>Upload the image of the affected plant. Please ensure you upload a clear image to avoid error during analysis.</li>
                        <li>Click on analyze button to initiate the disease detection.</li>
                        <li>A result containing three (3) possible diseases will be returned, together with health status, disease name, description, and treatment.</li>
                     </ul>
                 </div>
-                <div className='w-1/2'>
+                <div className='lg:w-1/2'>
                     <div className='flex flex-col items-center gap-10'>
                         {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
                         <div className="text-center border-primary border-[2px] border-dashed p-16 rounded-[8px]">
@@ -104,14 +105,14 @@ const Detect = () => {
                             )}
                             <div className="mt-4 mb-2 flex text-[16px] leading-6">
                                 <label
-                                    className="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-secondary"
+                                    className="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-secondary "
                                 >
-                                    <span className="px-2">Upload a file</span>
+                                    <span className="px-2 whitespace-nowrap">Upload a file</span>
                                     <input
                                         type="file" accept="image/*" onChange={handleImageChange} className="sr-only"
                                     />
                                 </label>
-                                <p className="pl-2">or drag and drop</p>
+                                <p className="pl-2 whitespace-nowrap">or drag and drop</p>
                             </div>
                             <p className="text-[16px] leading-5">PNG, JPG, GIF up to 10MB</p>
                         </div>
@@ -152,7 +153,7 @@ const Detect = () => {
                         <h1 className='text-center text-[34px]'>Assessment Result</h1>
 
                         <div className='flex justify-center items-center py-10'>
-                            <img src={imageResult} alt="" />
+                            <img src={imageResult} alt="" className='lg:w-[50%] w-[70%]' />
                         </div>
 
                         <div className='flex flex-col w-full gap-3 items-start'>
@@ -169,7 +170,7 @@ const Detect = () => {
 
                                                 <div>
                                                     <p className='text-[18px]'><span className='font-semibold text-[20px]'>Description:</span> {disease?.details.description}</p>
-                                                    <a href={disease?.details.url} target="_blank" rel="noopener noreferrer">Learn More</a>
+                                                    <a href={disease?.details.url} target="_blank" rel="noopener noreferrer" className='text-primary underline font-semibold mt-1'>Learn More</a>
                                                 </div>
 
                                                 <div>
@@ -182,7 +183,7 @@ const Detect = () => {
                                                                 return (
                                                                     <div key={i}>
                                                                         <div>
-                                                                            <ul className='list-disc'>
+                                                                            <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{biological}</li>
                                                                             </ul>
                                                                         </div>
@@ -196,7 +197,7 @@ const Detect = () => {
                                                                 return (
                                                                     <div key={i}>
                                                                         <div>
-                                                                            <ul className='list-disc'>
+                                                                            <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{chemical}</li>
                                                                             </ul>
                                                                         </div>
@@ -210,7 +211,7 @@ const Detect = () => {
                                                                 return (
                                                                     <div key={i}>
                                                                         <div>
-                                                                            <ul className='list-disc'>
+                                                                            <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{prevention}</li>
                                                                             </ul>
                                                                         </div>
