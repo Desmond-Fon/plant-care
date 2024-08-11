@@ -84,18 +84,26 @@ const Detect = () => {
 
     return (
         <div className="px-[20px] lg:px-[120px] overflow-x-hidden">
-            <div className='flex flex-col lg:flex-row justify-between items-start gap-[56px]'>
+            <div className='flex flex-col lg:flex-row justify-between items-center gap-[56px]'>
                 <div className='lg:w-1/2'>
                     <h1 className="text-[36px] lg:text-[48px] pb-[20px]">How To <span className="font-bold">Detect</span></h1>
-                    <ul className='text-[18px] lg:text-[24px] list-disc pl-4 lg:pl-0 px-4'>
-                       <li>Click on &quot;Upload a file&quot; button in the file input field.</li>
-                       <li>Upload the image of the affected plant. Please ensure you upload a clear image to avoid error during analysis.</li>
-                       <li>Click on analyze button to initiate the disease detection.</li>
-                       <li>A result containing three (3) possible diseases will be returned, together with health status, disease name, description, and treatment.</li>
+
+                    <ul className='text-[18px] lg:text-[24px] list-disc pl-4 lg:pl-0 px-4 text-tertiary'>
+                        <li>Click on the &quot;Upload a file&quot; button in the file input field. Select and upload a clear image of the affected plant to ensure accurate analysis.
+                        </li>
+                        <li>After uploading, click the &quot;Analyze&quot; button to initiate the disease detection process.
+                        </li>
+                        <li>Once the analysis is complete, you will receive a detailed report containing:
+                        </li>
+                        <p className='pl-3'>- Three possible diseases that match the symptoms observed in the image. <br />
+                            - The health status of the plant. <br />
+                            - The names of the diseases. <br />
+                            - A brief description of each disease. <br />
+                            - Suggested treatments to manage the detected diseases effectively.</p>
                     </ul>
                 </div>
                 <div className='lg:w-1/2 flex justify-center items-center w-full'>
-                    <div className='flex flex-col justify-center w-full items-center gap-10 overflow-x-hidden'>
+                    <div className='flex flex-col justify-center w-full items-center gap-10 overflow-x-hidden text-tertiary'>
                         {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
                         <div className="text-center border-primary border-[2px] border-dashed p-8 lg:p-16 rounded-[8px]">
                             {image ? (
@@ -116,7 +124,7 @@ const Detect = () => {
                             </div>
                             <p className="text-[16px] leading-5">PNG, JPG, GIF up to 5MB</p>
                         </div>
-                        <button onClick={handleImageUpload} className='py-[10px] text-white px-[55px] rounded-[20px] bg-primary'>{loader ? (
+                        <button onClick={handleImageUpload} className='py-[15px] text-[20px] text-white px-[55px] rounded-[20px] bg-primary'>{loader ? (
                             <svg
                                 className="animate-spin h-5 w-5 mr-3 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -168,8 +176,8 @@ const Detect = () => {
                                                 <h1 className='font-semibold text-[20px]'>{i + 1}. Name: {disease.name}</h1>
                                                 <h1 className='font-semibold text-[20px]'>Probability: {disease.probability * 100}%</h1>
 
-                                                <div>
-                                                    <p className='text-[18px]'><span className='font-semibold text-[20px]'>Description:</span> {disease?.details.description}</p>
+                                                <div className='text-tertiary'>
+                                                    <p className='text-[18px]'><span className='font-semibold text-[20px] text-black'>Description:</span> {disease?.details.description}</p>
                                                     <a href={disease?.details.url} target="_blank" rel="noopener noreferrer" className='text-primary underline font-semibold mt-1'>Learn More</a>
                                                 </div>
 
@@ -181,7 +189,7 @@ const Detect = () => {
                                                             <h1 className='text-[18px] font-semibold'>Biological Treatment</h1>
                                                             {disease?.details?.treatment?.biological && disease?.details?.treatment?.biological.map((biological, i) => {
                                                                 return (
-                                                                    <div key={i}>
+                                                                    <div key={i} className='text-tertiary'>
                                                                         <div>
                                                                             <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{biological}</li>
@@ -195,7 +203,7 @@ const Detect = () => {
                                                             <h1 className='text-[18px] font-semibold'>Chemical Treatment</h1>
                                                             {disease?.details?.treatment?.chemical && disease?.details?.treatment?.chemical.map((chemical, i) => {
                                                                 return (
-                                                                    <div key={i}>
+                                                                    <div key={i} className='text-tertiary'>
                                                                         <div>
                                                                             <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{chemical}</li>
@@ -209,7 +217,7 @@ const Detect = () => {
                                                             <h1 className='text-[18px] font-semibold'>Prevention</h1>
                                                             {disease?.details?.treatment?.prevention && disease?.details?.treatment?.prevention.map((prevention, i) => {
                                                                 return (
-                                                                    <div key={i}>
+                                                                    <div key={i} className='text-tertiary'>
                                                                         <div>
                                                                             <ul className='list-disc pl-4 lg:pl-0'>
                                                                                 <li key={i} className='text-[18px]'>{prevention}</li>

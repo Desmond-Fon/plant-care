@@ -62,15 +62,15 @@ const Nav = () => {
             >
                 <div className="flex justify-center items-center h-full">
                     <div className="text-center flex flex-col justify-center items-center h-full gap-[0px] text-[40px] font-[600]">
-                        <Link onClick={toggleMenu} to={"/"} className="w-full">
+                        <NavLink style={navLinkStyle} onClick={toggleMenu} to={"/"} className="w-full">
                             <p className="">Home</p>
-                        </Link>
-                        <Link onClick={toggleMenu} to={"/detect"} className="w-full">
+                        </NavLink>
+                        <NavLink style={navLinkStyle} onClick={toggleMenu} to={"/detect"} className="w-full">
                             <p className="">Analyze</p>
-                        </Link>
-                        <Link onClick={toggleMenu} to={"/about"} className="w-full">
+                        </NavLink>
+                        <NavLink style={navLinkStyle} onClick={toggleMenu} to={"/about"} className="w-full">
                             <p className="">About</p>
-                        </Link>
+                        </NavLink>
                     </div>
                 </div>
             </div>
