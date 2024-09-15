@@ -33,6 +33,8 @@ const Nav = () => {
                     >Analyze</NavLink>
                     <NavLink to={'/about'} style={navLinkStyle}
                     >About Us</NavLink>
+                    <NavLink to={'/contact'} style={navLinkStyle}
+                    >Contact Us</NavLink>
                 </div>
             </div>
 
@@ -70,6 +72,9 @@ const Nav = () => {
                         </NavLink>
                         <NavLink style={navLinkStyle} onClick={toggleMenu} to={"/about"} className="w-full">
                             <p className="">About</p>
+                        </NavLink>
+                        <NavLink style={navLinkStyle} onClick={toggleMenu} to={"/contact"} className="w-full">
+                            <p className="">Contact</p>
                         </NavLink>
                     </div>
                 </div>

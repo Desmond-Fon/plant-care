@@ -1,11 +1,13 @@
 // import ImageUploader from "../../components/ImageUploader";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import { useAppToast } from '../../lib/UseAppToast';
 import { PhotoIcon } from '@heroicons/react/16/solid'
 // import CustomModal from './Modal';
+import ReactToPrint from "react-to-print";
 
 const Detect = () => {
+    const componentRef = useRef();
     const toast = useAppToast();
     const [selectedImage, setSelectedImage] = useState(null);
     const [image, setImage] = useState(null);
@@ -157,7 +159,7 @@ const Detect = () => {
 
             <div className='pt-[100px] '>
                 {show && (
-                    <>
+                    <div ref={componentRef}>
                         <h1 className='text-center text-[34px]'>Assessment Result</h1>
 
                         <div className='flex justify-center items-center py-10'>
@@ -235,7 +237,11 @@ const Detect = () => {
                                 </div>
                             </div>
                         </div>
-                    </>
+                        <ReactToPrint
+                            trigger={() => <button className='py-[15px] text-[20px] text-white px-[55px] rounded-[20px] bg-primary mt-5'>Print this section</button>}
+                            content={() => componentRef.current}
+                        />
+                    </div>
                 )}
             </div>
 

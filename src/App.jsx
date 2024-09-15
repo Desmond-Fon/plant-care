@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Contact from "./pages/contact";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/detect" element={<Detect />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </BrowserRouter>
