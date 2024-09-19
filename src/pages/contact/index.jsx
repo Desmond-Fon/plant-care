@@ -35,7 +35,7 @@ const Contact = () => {
                   IITA-Ckan@cgiar.org
                 </p>
               </div>
-              <div className="flex flex-col lg:flex-row justify-center lg:justify-start  items-center gap-[10px] lg:gap-[25px]">
+              <div className="flex flex-col lg:flex-row relative z-[999] justify-center lg:justify-start  items-center gap-[10px] lg:gap-[25px]">
                 {/* <img src={contactLocation} alt="" /> */}
                 <p className=" lg:text-[16px] text-center lg:text-left  text-white">
                   PMB 5320, Oyo Road, Ibadan 200001,
